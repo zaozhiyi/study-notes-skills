@@ -4,13 +4,19 @@
 
 本仓库保存个人技能，不保存笔记正文、账号凭据或本地会话记录。仓库为私人仓库。当前共同发布版本见 `VERSION`。
 
+## 直接给仓库链接时
+
+先读仓库根 `SKILL.md`，按**当前应用**选择适配版。Grok、Claude、OpenAI 是模型选择，不代表宿主应用；在 Codex 中不能因此挑 Cursor 版。根 `AGENTS.md` 也说明这条路由。单独安装某个平台时只复制对应适配目录。
+
+完成标准是可读文档与继续学习的入口，不能只交源稿或代码 diff。文件笔记的主阅读位置与全局独立备份分开；图表不能呈现时用流程表，避免交付无法阅读的 Mermaid 草稿。
+
 ## 选择哪一版
 
 | 平台 | skill 目录 | 文档能力与依赖 |
 | --- | --- | --- |
 | Claude | `claude/study-notes-docs/` | 原有 Claude Docs 流程；必须实际连接 Docs 工具。备份脚本还依赖原有 Claude 会话记录格式及本地清单。不是仅选择 Claude 模型就能使用。 |
 | Codex | `codex/study-notes-pages/` | 原生 Pages 与 Codex 文档打开工具；Word 生成、验证还需 documents skill。已有 Page 需要账号权限。 |
-| Cursor | `cursor/study-notes-cursor/` | 由本地 Cursor Agent 根据两版编写。默认本地 Markdown；有真实可用的文档 MCP 时才使用其能力。原生评论与高亮不能仅靠 skill 获得，具体见该版说明。 |
+| Cursor | `cursor/study-notes-cursor/` | 由本地 Cursor Agent 根据两版编写。新建未指定载体时按真实文档能力选择；文件笔记优先当前工作区可打开的 Markdown 预览，全局目录作独立备份。原生评论与高亮不能仅靠 skill 获得，具体见该版说明。 |
 
 ## 安装
 
@@ -57,11 +63,17 @@ python3 scripts/sync_principles.py --check
 
 - 脚本使用 Python 3.9+；推荐 3.12。Word 高亮脚本需要 `lxml`，Codex 备份脚本在缺少系统时区数据时需要 `tzdata`。
 - 新 Cursor 版的依赖、实现和验证边界见 `cursor/study-notes-cursor/references/compatibility.md`。
-- 本次核验会记录在 `VALIDATION.md`，区分本地脚本检查和真实文档 UI 验证。没有完成的界面检查不称为已验证。
+- 各次核验记录在 `VALIDATION.md`，区分本地脚本检查和真实文档 UI 验证。没有完成的界面检查不称为已验证。
 - Claude 旧备份脚本依赖原会话记录与清单；本次不会执行它扫描私人会话，不对其现行工具兼容性作新承诺。旧脚本可能遍历清单和会话记录，未完成单份同步范围的重新验证；遇到与共同规则冲突时不能直接运行，应先按目标笔记限定输入或调整脚本。
 
 ## 来源
 
 - Claude/Codex：用户本机已有技能，2026-10-08 留档。
-- Cursor：用户授权后由本地 Cursor Agent 读取两版与共同规则生成；Codex 做一致性与包装检查。
+- Cursor：v1.0.0 由本地 Cursor Agent 读取两版与共同规则生成；v1.1.0 由 Codex 根据用户试用反馈修订，再用 Cursor CLI 和用户指定的 Grok 4.7 High 对虚构素材试写。
 - Cursor 技能格式和目录：[官方 Agent Skills 文档](https://cursor.com/docs/skills)。
+
+## v1.1.0 的修正
+
+针对另一台电脑试用时只交付 Markdown 源稿、文件无法直接阅读、正文夹入制作说明的问题：增加根入口按宿主路由；统一阅读交付与教材组织要求；Cursor 分开主文件与备份位置，压缩普通回复，把 Word 操作移到按需读取的参考文件。原始来源与原处理脚本保留。
+
+更新后重新读取根 SKILL.md 和对应适配版；已复制安装的旧 skill 也要更新，git pull 不会自动替换全局安装目录。另一个设备的旧笔记不会随 skill 更新自动重写。
