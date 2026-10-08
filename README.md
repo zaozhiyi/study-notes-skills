@@ -1,0 +1,67 @@
+# 学习笔记 · Claude / Codex / Cursor
+
+同一套学习笔记规则，三个平台适配版。三版共用写法、正文修改边界、评论习惯和备份规则；各自使用平台真实可用的文档工具。**规则对齐不等于笔记自动互通，也不保证三个界面功能一样。**
+
+本仓库保存个人技能，不保存笔记正文、账号凭据或本地会话记录。仓库为私人仓库。当前共同发布版本见 `VERSION`。
+
+## 选择哪一版
+
+| 平台 | skill 目录 | 文档能力与依赖 |
+| --- | --- | --- |
+| Claude | `claude/study-notes-docs/` | 原有 Claude Docs 流程；必须实际连接 Docs 工具。备份脚本还依赖原有 Claude 会话记录格式及本地清单。不是仅选择 Claude 模型就能使用。 |
+| Codex | `codex/study-notes-pages/` | 原生 Pages 与 Codex 文档打开工具；Word 生成、验证还需 documents skill。已有 Page 需要账号权限。 |
+| Cursor | `cursor/study-notes-cursor/` | 由本地 Cursor Agent 根据两版编写。默认本地 Markdown；有真实可用的文档 MCP 时才使用其能力。原生评论与高亮不能仅靠 skill 获得，具体见该版说明。 |
+
+## 安装
+
+下载或克隆此私人仓库后，只复制需要的 skill 文件夹，保留其 scripts/references 等子目录：
+
+| 平台 | 默认全局安装位置 |
+| --- | --- |
+| Claude | `~/.claude/skills/study-notes-docs/` |
+| Codex | `~/.codex/skills/study-notes-pages/`；自定义 CODEX_HOME 时使用其 skills 目录 |
+| Cursor | `~/.cursor/skills/study-notes-cursor/` |
+
+已有同名目录时先留一份旧目录副本，再更新；不要把整个仓库直接放到技能扫描目录，避免把其他平台版同时装进去。Windows 的 `~` 对应用户目录。
+
+Cursor 官方也支持读取 Claude/Codex 的技能目录，因此同一电脑已经有另外两版时，在 Cursor 中明确调用 `/study-notes-cursor`，并确认 Customize → Skills 显示了新版本。选择 Claude 或 OpenAI 模型不会自动连接 Claude Docs 或 Codex Pages。
+
+本包不包含平台插件、账号连接、笔记清单或历史文件。继续已有笔记需要迁移对应清单和本地备份，并使用有文档权限的账号；不建议把这些资料提交到 skill 仓库。
+
+## 共同规则如何保持一致
+
+- `shared/principles.md` 是共同规则的维护源，三个 skill 的 `references/principles.md` 是相同副本，保证单独安装也能读取。
+- 写法统一：先说明整体主线，再按概念依赖解释；术语用大白话，默认搜索、电商和推荐举例。
+- 评论统一：解释问题默认只回复原线程，不改正文；没有线程接口就说明并在聊天回答。评论默认保持打开，用户要求时才关闭。
+- 备份统一：只在相关正文/评论改完或用户要求时执行，保留历史，不覆盖旧原件，不做定时轮询。
+- 平台差异保留：文档载体、工具 schema、选区定位、导出和脚本各自实现，不照抄不存在的工具名。
+
+共同规则更新后，在仓库根目录运行：
+
+```bash
+python3 scripts/sync_principles.py --write
+python3 scripts/sync_principles.py --check
+```
+
+发布前还要逐版检查：仅提问时是否只回答、写回时是否只改授权段落、评论是否保持打开、重复选区是否拒绝猜测、不完整读取是否保留旧备份、能力报告是否符合实际工具。字节一致性检查不证明实际 agent 行为一致。
+
+三版放在同一分支的不同目录，统一用 `vX.Y.Z` 标签发布。共同规则变更同步三版；单个平台的工具变更只修改对应版，并更新能力说明。这样能一起审查，避免分别维护三个分支后逐渐分叉。
+
+## 保留原版与修改范围
+
+本次没有改动本机原有 Claude/Codex skill。仓库中的两版沿用原平台流程与脚本，新增共同规则入口；仅修正与已明确的评论边界冲突的说明，以及未经确认就承诺连接成功的旧表述，并明确旧同步脚本的执行范围限制。原始 SKILL.md 存在 `sources/claude-original.md`、`sources/codex-original.md`，来源文件 SHA-256 存在 `sources/manifest.json`。
+
+`sources/` 是历史资料，不是安装入口，旧版自动解决评论等行为不再作为现行规则。Codex 版的个人 Page ID 仍保留，不包含正文，也不授予权限；旧迁移记录只代表历史验证。
+
+## 运行与验证
+
+- 脚本使用 Python 3.9+；推荐 3.12。Word 高亮脚本需要 `lxml`，Codex 备份脚本在缺少系统时区数据时需要 `tzdata`。
+- 新 Cursor 版的依赖、实现和验证边界见 `cursor/study-notes-cursor/references/compatibility.md`。
+- 本次核验会记录在 `VALIDATION.md`，区分本地脚本检查和真实文档 UI 验证。没有完成的界面检查不称为已验证。
+- Claude 旧备份脚本依赖原会话记录与清单；本次不会执行它扫描私人会话，不对其现行工具兼容性作新承诺。旧脚本可能遍历清单和会话记录，未完成单份同步范围的重新验证；遇到与共同规则冲突时不能直接运行，应先按目标笔记限定输入或调整脚本。
+
+## 来源
+
+- Claude/Codex：用户本机已有技能，2026-10-08 留档。
+- Cursor：用户授权后由本地 Cursor Agent 读取两版与共同规则生成；Codex 做一致性与包装检查。
+- Cursor 技能格式和目录：[官方 Agent Skills 文档](https://cursor.com/docs/skills)。

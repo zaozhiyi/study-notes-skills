@@ -1,0 +1,21 @@
+{
+  "captured_on": "2026-10-08",
+  "sources": {
+    "claude": {
+      "skill": "study-notes-docs",
+      "files": {
+        "SKILL.md": "1e01f1f50a161e61a2a57d6156f612a3dac18661a22abafe2919720e9ddf13c1",
+        "sync/build.py": "6c9ce7e625722fdd0cad1fb0064ca0775799d3bc13fa9f9dba1bcb8f32382741"
+      }
+    },
+    "codex": {
+      "skill": "study-notes-pages",
+      "files": {
+        "SKILL.md": "6adee551b93f9942eced046971696ba3cb4a7a1f3b2181823d0143b7ba4929a4",
+        "scripts/extract_highlights.py": "66c66aaed198151e45e5550c75471db3dfddd01719205f9eacaa078dcc4f9db0",
+        "scripts/save_snapshot.py": "627b7ccf38950e94112a8addb44882a12a7c193c49047618dd183f9049b7142b",
+        "scripts/set_docx_highlight.py": "78e70638433251eca644c4d447c6ca48120042327315623a99222bd7385f40c5"
+      }
+    }
+  }
+}

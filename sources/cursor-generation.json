@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-08",
+  "author": "Local Cursor Agent CLI",
+  "cli_version": "2026.10.01-14929f9",
+  "requested_model_id": "grok-4.7-high",
+  "observed_model": "Grok 4.7 256K High",
+  "inputs": [
+    "claude/study-notes-docs/SKILL.md",
+    "codex/study-notes-pages/SKILL.md",
+    "shared/principles.md",
+    "sources/claude-original.md",
+    "sources/codex-original.md"
+  ],
+  "reviewer": "Codex",
+  "scope": "Cursor skill generation only; no note contents or credentials"
+}
