@@ -30,14 +30,14 @@
 
 已有同名目录时先留一份旧目录副本，再更新；不要把整个仓库直接放到技能扫描目录，避免把其他平台版同时装进去。Windows 的 `~` 对应用户目录。
 
-Cursor 官方也支持读取 Claude/Codex 的技能目录，因此同一电脑已经有另外两版时，在 Cursor 中明确调用 `/study-notes-cursor`，并确认 Customize → Skills 显示了新版本。选择 Claude 或 OpenAI 模型不会自动连接 Claude Docs 或 Codex Pages。
+Cursor 官方也支持读取 Claude/Codex 的技能目录，因此同一电脑已经有另外两版时，在 Cursor 中明确调用 `/study-notes-cursor`，并确认 Customize → Skills 中出现该技能；打开其 SKILL.md 核对版本。选择 Claude 或 OpenAI 模型不会自动连接 Claude Docs 或 Codex Pages。
 
 本包不包含平台插件、账号连接、笔记清单或历史文件。继续已有笔记需要迁移对应清单和本地备份，并使用有文档权限的账号；不建议把这些资料提交到 skill 仓库。
 
 ## 共同规则如何保持一致
 
 - `shared/principles.md` 是共同规则的维护源，三个 skill 的 `references/principles.md` 是相同副本，保证单独安装也能读取。
-- 写法统一：先说明整体主线，再按概念依赖解释；术语用大白话，默认搜索、电商和推荐举例。
+- 写法统一：先说明整体主线，再按概念依赖解释；术语用大白话，优先当前主题的具体例子；无合适场景时使用搜索、电商或推荐。
 - 评论统一：解释问题默认只回复原线程，不改正文；没有线程接口就说明并在聊天回答。评论默认保持打开，用户要求时才关闭。
 - 备份统一：只在相关正文/评论改完或用户要求时执行，保留历史，不覆盖旧原件，不做定时轮询。
 - 平台差异保留：文档载体、工具 schema、选区定位、导出和脚本各自实现，不照抄不存在的工具名。
@@ -55,7 +55,7 @@ python3 scripts/sync_principles.py --check
 
 ## 保留原版与修改范围
 
-本次没有改动本机原有 Claude/Codex skill。仓库中的两版沿用原平台流程与脚本，新增共同规则入口；仅修正与已明确的评论边界冲突的说明，以及未经确认就承诺连接成功的旧表述，并明确旧同步脚本的执行范围限制。原始 SKILL.md 存在 `sources/claude-original.md`、`sources/codex-original.md`，来源文件 SHA-256 存在 `sources/manifest.json`。
+本次没有改动本机原有 Claude/Codex skill。仓库中的两版保留原平台流程与脚本，统一读取共同教学规则；平台正文中重复的写法要求已收敛到共同规则。评论边界、真实能力确认和旧同步脚本范围限制按现行说明执行。原始 SKILL.md 存在 `sources/claude-original.md`、`sources/codex-original.md`，来源文件 SHA-256 存在 `sources/manifest.json`。
 
 `sources/` 是历史资料，不是安装入口，旧版自动解决评论等行为不再作为现行规则。Codex 版的个人 Page ID 仍保留，不包含正文，也不授予权限；旧迁移记录只代表历史验证。
 
@@ -69,7 +69,7 @@ python3 scripts/sync_principles.py --check
 ## 来源
 
 - Claude/Codex：用户本机已有技能，2026-10-08 留档。
-- Cursor：v1.0.0 由本地 Cursor Agent 读取两版与共同规则生成；v1.1.0 由 Codex 根据用户试用反馈修订，再用 Cursor CLI 和用户指定的 Grok 4.7 High 对虚构素材试写。
+- Cursor：v1.0.0 由本地 Cursor Agent 读取两版与共同规则生成；v1.1.0、v1.2.0 由 Codex 根据用户试用反馈修订，使用 Cursor CLI 和用户指定的 Grok 4.7 High 对虚构素材试写；每次验证方式与结果分别留档。
 - Cursor 技能格式和目录：[官方 Agent Skills 文档](https://cursor.com/docs/skills)。
 
 ## v1.1.0 的修正
@@ -77,3 +77,11 @@ python3 scripts/sync_principles.py --check
 针对另一台电脑试用时只交付 Markdown 源稿、文件无法直接阅读、正文夹入制作说明的问题：增加根入口按宿主路由；统一阅读交付与教材组织要求；Cursor 分开主文件与备份位置，压缩普通回复，把 Word 操作移到按需读取的参考文件。原始来源与原处理脚本保留。
 
 更新后重新读取根 SKILL.md 和对应适配版；已复制安装的旧 skill 也要更新，git pull 不会自动替换全局安装目录。另一个设备的旧笔记不会随 skill 更新自动重写。
+
+## v1.2.0：教学质量修正
+
+围绕用户的理解缺口重建正文，先给全貌再讲机制。用一个能走通的例子展示输入、处理、输出和后续使用；查询限定与参数、各阶段数字必须对应。原始材料与此前助手的解释分开，冲突回查证据；背景支线按教学需要安排。作者读回检查内容后再交付，不能只验格式。
+
+Cursor 版内置这个写作与检查流程，不需要用户每次额外说明“不要汇总、要解释”。三版共同规则同步，文档工具保留各自适配。独立试写与验证边界见 VALIDATION.md。
+
+另一台电脑更新后，重新读取根 SKILL.md 与 Cursor 版。复制安装方式还须替换旧安装目录中的完整 skill 文件夹；入口显示版本 1.2.0。不需要同时读取其他平台说明、Word 参考或验证记录来写普通笔记。
