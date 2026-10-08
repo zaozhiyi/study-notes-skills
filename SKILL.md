@@ -9,7 +9,7 @@ description: 学习笔记仓库统一入口。用户给本仓库链接、要求�
 
 | 当前宿主 | 操作入口 |
 | --- | --- |
-| Claude 的原生 Docs 环境 | [Claude 版](claude/study-notes-docs/SKILL.md) |
+| Claude（原生 Docs 能力须实际可用） | [Claude 版](claude/study-notes-docs/SKILL.md) |
 | Codex，包括使用其他厂商模型时 | [Codex 版](codex/study-notes-pages/SKILL.md) |
 | Cursor，包括使用 Claude、Grok 或 OpenAI 模型时 | [Cursor 版](cursor/study-notes-cursor/SKILL.md) |
 
